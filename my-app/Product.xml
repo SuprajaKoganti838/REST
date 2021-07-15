@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testSuite id="f1a1bbc6-2e1c-4c45-8d99-d3d55db78fd2" name="Product" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="bec2e0be-4659-4d90-a851-dbf1e4cb69b9" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="AddNewProduct" searchProperties="true"><con:settings/><con:testStep type="restrequest" name="AddNewProduct" id="b90d21dc-7234-4208-bd9e-8094c9930bec"><con:settings/><con:config service="http://rest-api.upskills.in" resourcePath="/api/rest_admin/products" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="AddNewProduct" id="685f30df-1fc1-4530-853e-81adb2f71d99" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="bearer ${#TestSuite#accessToken}" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:endpoint>http://rest-api.upskills.in</con:endpoint><con:request>{
+  "model": "ModelX1",
+  "quantity": "100",
+  "price": "666.00",
+  "tax_class_id": "1",
+  "manufacturer_id": "202",
+  "sku": "demo sku",
+  "product_seo_url": [
+    {
+      "keyword": "X1",
+      "language_id": "1",
+      "store_id": "0"
+    }
+  ],
+  "status": "1",
+  "points": 0,
+  "reward": 0,
+  "image": "",
+  "other_images": [
+    ""
+  ],
+  "shipping": "1",
+  "stock_status_id": 0,
+  "upc": "",
+  "ean": "",
+  "jan": "",
+  "isbn": "",
+  "mpn": "",
+  "location": "",
+  "date_available": "2019-01-01",
+  "weight": 0,
+  "weight_class_id": 0,
+  "length": 0,
+  "width": 0,
+  "height": 0,
+  "length_class_id": 0,
+  "subtract": 0,
+  "minimum": 0,
+  "sort_order": "",
+  "product_store": [
+    "0"
+  ],
+  "product_related": [
+    "34"
+  ],
+  "product_filter": [
+    "34"
+  ],
+  "product_description": [
+    {
+      "language_id": "1",
+      "name": "ModelX",
+      "description": "New model",
+      "meta_title": "Mobile",
+      "meta_description": "Smart Phone supporting 5G network",
+      "meta_keyword": "model, X, modelX",
+      "tag": "Smart,5G"
+    }
+  ],
+  "product_category": [
+    "2"
+  ],
+  "product_special": [
+    {
+      "customer_group_id": "1",
+      "price": "666",
+      "priority": "1",
+      "date_start": "2019-01-01",
+      "date_end": "2019-02-28"
+    }
+  ],
+  "product_discount": [
+    {
+      "name": "ModelX1",
+      "customer_group_id": "1",
+      "price": "566",
+      "priority": "1",
+      "quantity": "1",
+      "date_start": "2019-01-01",
+      "date_end": "2019-01-23"
+    }
+  ],
+  "product_attribute": [
+    {
+      "attribute_id": "16",
+      "product_attribute_description": [
+        {
+          "text": "Smart",
+          "language_id": "1"
+        }
+      ]
+    }
+  ],
+  "product_option": [
+    {
+      "type": "mobile",
+      "option_id": "11",
+      "required": "1",
+      "product_option_value": [
+        {
+          "price": "666.00",
+          "price_prefix": "+",
+          "subtract": "1",
+          "points": "0",
+          "points_prefix": "+",
+          "weight": "0",
+          "weight_prefix": "+",
+          "option_value_id": "46",
+          "quantity": "0"
+        }
+      ]
+    }
+  ]
+}</con:request><con:originalUri>http://rest-api.upskills.in/api/rest_admin/products</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:testStep type="groovy" name="GetProductId" id="5dbba205-a344-44ec-859a-408b7b7925ed"><con:settings/><con:config><script>def product_id=context.expand('${Response#$.data.id}')
+log.info product_id
+context.testCase.testSuite.project.testSuites["Product"].setPropertyValue("product_id",product_id)
+</script></con:config></con:testStep><con:properties/></con:testCase><con:properties><con:property><con:name>accessToken</con:name><con:value>9ce3605790a505273882eed54bcafa2cde5f4e27</con:value></con:property><con:property><con:name>product_id</con:name><con:value>3712</con:value></con:property></con:properties></con:testSuite>

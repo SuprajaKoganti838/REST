@@ -1,0 +1,10 @@
+Status: FAILED
+Time Taken: 0
+Size: 0
+Timestamp: Mon Jul 05 08:41:55 IST 2021
+TestStep: BulkAddProducts
+
+----------------- Messages ------------------------------
+org.apache.http.NoHttpResponseException: The target server failed to respond
+
+- missing response / garbage collected -

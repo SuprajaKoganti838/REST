@@ -1,0 +1,10 @@
+Status: FAILED
+Time Taken: 0
+Size: 0
+Timestamp: Mon Jul 05 08:23:45 IST 2021
+TestStep: GetProductList
+
+----------------- Messages ------------------------------
+java.net.UnknownHostException: rest-api.upskills.in
+
+- missing response / garbage collected -

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testSuite id="d2de0b80-9acb-40e7-8f07-4886c04f0d62" name="Admin" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="a038d594-f6e5-489e-a477-454d4cd44ea7" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="AccessToken" searchProperties="true"><con:settings/><con:testStep type="restrequest" name="GetAccessToken" id="df0401d1-62bd-4b76-8d0d-97d016bfaae6"><con:settings/><con:config service="http://rest-api.upskills.in" resourcePath="/api/rest_admin/oauth2/token/client_credentials" methodName="Client_credentials 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="GetAccessToken" id="e565095c-d515-4095-9532-9b9ba031be8e" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="Basic dXBza2lsbHNfcmVzdF9hZG1pbl9vYXV0aF9jbGllbnQ6dXBza2lsbHNfcmVzdF9hZG1pbl9vYXV0aF9zZWNyZXQ=" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:endpoint>http://rest-api.upskills.in</con:endpoint><con:request/><con:originalUri>http://rest-api.upskills.in/api/rest_admin/oauth2/token/client_credentials</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="3cff563c-c568-427c-813c-92eb60025c39" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="5d639cef-b980-4570-b33a-6de7d9f6475d" name="Script Assertion"><con:configuration><scriptText>//automating passing of access token for user login
+def token = context.expand('${Response#$.data.access_token}')
+log.info token
+context.testCase.testSuite.project.testSuites["Admin"].setPropertyValue("accessToken",token)
+context.testCase.testSuite.project.testSuites["Product"].setPropertyValue("accessToken",token)
+//validating status code
+def statuscode = context.expand('${Response#$.success}')
+assert statuscode=='1'</scriptText></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="e993e97e-6efd-4334-9a1f-fd8260ed8375" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="LoginCredentials" searchProperties="true"><con:settings/><con:testStep type="groovy" name="Login Credentials" id="e56390a7-dbdf-45e4-8168-dde7012679e6"><con:settings/><con:config><script>import jxl.*
+import com.eviware.soapui.support.XmlHolder
+def username,password
+def filepath="C:\\Users\\SuprajaKoganti\\Documents\\AdminLogin.xls"
+File myfile=new File(filepath)
+Workbook wb=Workbook.getWorkbook(myfile)
+Sheet sh=wb.getSheet("Sheet1")
+
+def row=sh.getRows().toInteger()
+log.info row
+def column=sh.getColumns().toInteger()
+for(def i=1;i&lt;row;i++)
+{
+		for(def j=0;j&lt;column;j++)
+		{
+			if(j==0)
+			{
+				username=sh.getCell(j,i).getContents()
+				log.info "$username"
+			
+			}
+			else if(j==1)
+			{
+				password=sh.getCell(j,i).getContents()
+				log.info "$password"
+			}
+			
+		
+		}
+	def tc1 = testRunner.testCase.testSuite.project.testSuites["Admin"].testCases["Login"]
+	tc1.testSteps["Credentials"].setPropertyValue("username",username)
+	tc1.testSteps["Credentials"].setPropertyValue("password",password)
+	
+}</script></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="305a8dff-1534-498c-95d6-f13e1e9ee2d8" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Login" searchProperties="true"><con:settings/><con:testStep type="properties" name="Credentials" id="427ea41e-541b-42dc-9230-7a6ce38b5f50"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>username</con:name><con:value>upskills_admin</con:value></con:property><con:property><con:name>password</con:name><con:value>Talent4$$</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="restrequest" name="Login" id="1aa7a469-737b-4e36-a58e-02db1c8faf13"><con:settings/><con:config service="http://rest-api.upskills.in" resourcePath="/api/rest_admin/login" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Login" id="8990b3a6-df97-4e64-82a0-aa2d9df86ab7" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="bearer ${#TestSuite#accessToken}" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:endpoint>http://rest-api.upskills.in</con:endpoint><con:request>{
+  "username": "${Credentials#username}",
+  "password": "${Credentials#password}"
+}</con:request><con:originalUri>http://rest-api.upskills.in/api/rest_admin/login</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="bea9e7a6-c2cb-4909-b3f7-ee22ea03f0a0" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="7db9d087-0bb6-4305-9268-ce4ee44b34ac" name="Script Assertion"><con:configuration><scriptText>//validating username to ensure it has more than 7 charecters
+def user = context.expand('${Request#$.username}')
+assert user.size()>=7
+log.info user
+//validating status code
+def statuscode = context.expand('${Response#$.success}')
+assert statuscode=='1'</scriptText></con:configuration></con:assertion><con:credentials><con:username>upskills_admin</con:username><con:password>Talent4$$</con:password><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="dcf53784-2d1f-46a1-a561-e68613785bf0" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="GetAdminDetails" searchProperties="true"><con:settings/><con:testStep type="restrequest" name="AdminDetails" id="10ad41fd-df86-41bb-9b98-32f25da763d9"><con:settings/><con:config service="http://rest-api.upskills.in" resourcePath="/api/rest_admin/user" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="AdminDetails" id="e08c23bd-eb2e-4f45-8408-b2542d18305a" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="bearer ${#TestSuite#accessToken}" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:endpoint>http://rest-api.upskills.in</con:endpoint><con:request/><con:originalUri>http://rest-api.upskills.in/api/rest_admin/user</con:originalUri><con:assertion type="GroovyScriptAssertion" id="8deb78c3-c5c4-409b-b921-6377ecd6de86" name="Script Assertion"><con:configuration><scriptText>//validating admin
+def username= context.expand('${Response#$.data.username}')
+
+//import com.eviware.soapui.support.XmlHolder
+//def tc=testRunner.testCase.testSuite.project.testSuites['Admin'].testCases['adminLogin']
+//def ts=tc.testSteps['adminUser'].getPropertyValue('request')
+//def holder=new XmlHolder(ts)
+//def user=holder.getNodeValue("//*:username")
+//log.info user
+//assert username==user
+
+assert username=="upskills_admin"
+//validating status code
+def statuscode = context.expand('${Response#$.success}')
+assert statuscode=='1'</scriptText></con:configuration></con:assertion><con:assertion type="Valid HTTP Status Codes" id="0522e1bd-5da7-4a3f-be79-c6f0e5677f27" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="797bf28c-9f94-4f67-b547-22dc52d2cf4e" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Logout" searchProperties="true"><con:settings/><con:testStep type="restrequest" name="Logout" id="13c46c9e-dcdf-4270-a80a-0dfc4c67e623"><con:settings/><con:config service="http://rest-api.upskills.in" resourcePath="/api/rest_admin/logout" methodName="Method 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Logout" id="5232a736-4004-41d2-83cf-bb6905f0a180" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="bearer ${#TestSuite#accessToken}" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:endpoint>http://rest-api.upskills.in</con:endpoint><con:request/><con:originalUri>http://rest-api.upskills.in/api/rest_admin/logout</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:properties/></con:testCase><con:properties><con:property><con:name>accessToken</con:name><con:value>9ce3605790a505273882eed54bcafa2cde5f4e27</con:value></con:property></con:properties></con:testSuite>

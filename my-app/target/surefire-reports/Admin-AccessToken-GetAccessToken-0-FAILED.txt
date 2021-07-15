@@ -1,0 +1,51 @@
+Status: FAILED
+Time Taken: 1055
+Size: 132
+Timestamp: Mon Jul 05 08:33:53 IST 2021
+TestStep: GetAccessToken
+
+----------------- Messages ------------------------------
+[Script Assertion] assert statuscode=='1'
+       |         |
+       ""        false
+
+----------------- Properties ------------------------------
+HTTP Version: HTTP/1.1
+Endpoint: http://rest-api.upskills.in
+Method: POST
+StatusCode: 200
+URL: http://rest-api.upskills.in/api/rest_admin/oauth2/token/client_credentials
+
+---------------- Request ---------------------------
+Authorization: [Basic dXBza2lsbHNfcmVzdF9hZG1pbl9vYXV0aF9jbGllbnQ6dXBza2lsbHNfcmVzdF9hZG1pbl9vYXV0aF9zZWNyZXQ=]
+Connection: [Keep-Alive]
+User-Agent: [Apache-HttpClient/4.1.1 (java 1.5)]
+Host: [rest-api.upskills.in]
+Accept-Encoding: [gzip,deflate]
+Content-Length: [0]
+Content-Type: [application/json]
+
+POST http://rest-api.upskills.in/api/rest_admin/oauth2/token/client_credentials HTTP/1.1
+Accept-Encoding: gzip,deflate
+Content-Type: application/json
+Authorization: Basic dXBza2lsbHNfcmVzdF9hZG1pbl9vYXV0aF9jbGllbnQ6dXBza2lsbHNfcmVzdF9hZG1pbl9vYXV0aF9zZWNyZXQ=
+Content-Length: 0
+Host: rest-api.upskills.in
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.1.1 (java 1.5)
+
+
+---------------- Response --------------------------
+Keep-Alive: [timeout=5, max=100]
+date: [Mon, 05 Jul 2021 03:03:55 GMT]
+set-cookie: [OCSESSID=e0994be52fc62d31842290b0ef; path=/, language=en-gb; expires=Wed, 04-Aug-2021 03:03:55 GMT; Max-Age=2592000; path=/; domain=rest-api.upskills.in, currency=INR; expires=Wed, 04-Aug-2021 03:03:55 GMT; Max-Age=2592000; path=/; domain=rest-api.upskills.in]
+content-length: [130]
+server: [LiteSpeed]
+vary: [Accept-Encoding]
+content-encoding: [gzip]
+Connection: [Keep-Alive]
+x-powered-by: [PHP/5.6.40]
+content-type: [application/json; charset=utf-8]
+#status#: [HTTP/1.1 200 OK]
+
+{"success":1,"error":[],"data":{"access_token":"09979884c8cd45b8612f0861aafd5bf96f745805","expires_in":86400,"token_type":"Bearer"}}

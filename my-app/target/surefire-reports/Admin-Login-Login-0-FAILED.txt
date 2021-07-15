@@ -1,0 +1,55 @@
+Status: FAILED
+Time Taken: 1733
+Size: 47
+Timestamp: Mon Jul 05 08:41:52 IST 2021
+TestStep: Login
+
+----------------- Messages ------------------------------
+[Valid HTTP Status Codes] Response status code:400 is not in acceptable list of status codes
+[Script Assertion] assert user.size()>=7
+       |    |     |
+       ""   0     false
+
+----------------- Properties ------------------------------
+HTTP Version: HTTP/1.1
+Endpoint: http://rest-api.upskills.in
+Username: upskills_admin
+Method: POST
+StatusCode: 400
+URL: http://rest-api.upskills.in/api/rest_admin/login
+Password: Talent4$$
+
+---------------- Request ---------------------------
+Authorization: [bearer ]
+Connection: [Keep-Alive]
+User-Agent: [Apache-HttpClient/4.1.1 (java 1.5)]
+Host: [rest-api.upskills.in]
+Accept-Encoding: [gzip,deflate]
+Content-Length: [65]
+Content-Type: [application/json]
+
+POST http://rest-api.upskills.in/api/rest_admin/login HTTP/1.1
+Accept-Encoding: gzip,deflate
+Content-Type: application/json
+Authorization: bearer 
+Content-Length: 65
+Host: rest-api.upskills.in
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.1.1 (java 1.5)
+
+
+
+---------------- Response --------------------------
+Keep-Alive: [timeout=5, max=100]
+date: [Mon, 05 Jul 2021 03:11:54 GMT]
+set-cookie: [OCSESSID=332cd3d7f9668a5f563a6af773; path=/, language=en-gb; expires=Wed, 04-Aug-2021 03:11:54 GMT; Max-Age=2592000; path=/; domain=rest-api.upskills.in, currency=INR; expires=Wed, 04-Aug-2021 03:11:54 GMT; Max-Age=2592000; path=/; domain=rest-api.upskills.in]
+content-length: [67]
+server: [LiteSpeed]
+vary: [Accept-Encoding]
+content-encoding: [gzip]
+Connection: [Keep-Alive]
+x-powered-by: [PHP/5.6.40]
+content-type: [application/json; charset=utf-8]
+#status#: [HTTP/1.1 400 Bad Request]
+
+{"success":0,"error":["Bad Request"],"data":[]}
